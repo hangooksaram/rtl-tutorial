@@ -1,5 +1,7 @@
 import Profile from "./components/Profile";
+import TodoApp from "./components/todo/TodoApp";
 import TodoForm from "./components/todo/TodoForm";
+import TodoList from "./components/todo/TodoList";
 
 function App() {
   const onInsert = (value) => {
@@ -7,8 +9,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Profile username="hj" name="오현재" />;
-      <TodoForm onInsert={onInsert} />
+      <TodoApp />;
     </div>
   );
 }
