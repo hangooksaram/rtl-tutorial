@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TodoForm from "../../components/todo/TodoForm";
 
@@ -7,10 +7,9 @@ describe("todo form", () => {
   const inputText = "TDD 배우기";
 
   const elements = (props) => {
-    const { getByText, getByPlaceholderText } = render(<TodoForm {...props} />);
-
-    const input = getByPlaceholderText("할 일을 입력하세요");
-    const button = getByText("등록");
+    render(<TodoForm {...props} />);
+    const input = screen.getByPlaceholderText("할 일을 입력하세요");
+    const button = screen.getByText("등록");
 
     return { input, button };
   };

@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import React from "react";
 import TodoList from "../../components/todo/TodoList";
@@ -22,14 +22,13 @@ describe("todo list 테스트", () => {
   };
 
   const elements = (props) => {
-    const utils = render(<TodoList {...initialProps} {...props} />);
+    render(<TodoList {...initialProps} {...props} />);
 
-    const first = utils.getByText(mockDatas[0].text);
-    const second = utils.getByText(mockDatas[1].text);
-    const removeButton = utils.getAllByText("삭제")[0];
+    const first = screen.getByText(mockDatas[0].text);
+    const second = screen.getByText(mockDatas[1].text);
+    const removeButton = screen.getAllByText("삭제")[0];
 
     return {
-      ...utils,
       first,
       second,
       removeButton,

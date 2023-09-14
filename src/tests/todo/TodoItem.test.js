@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import React from "react";
 import TodoItem from "../../components/todo/TodoItem";
@@ -14,15 +14,13 @@ describe("todo item 테스트", () => {
     todo: mockData,
   };
   const elements = (props = {}) => {
-    const utils = render(<TodoItem {...initialProps} {...props} />);
+    render(<TodoItem {...initialProps} {...props} />);
 
-    const { getByText } = utils;
     const todo = props.todo || initialProps.todo;
 
-    const span = getByText(todo.text);
-    const button = getByText("삭제");
+    const span = screen.getByText(todo.text);
+    const button = screen.getByText("삭제");
     return {
-      ...utils,
       span,
       button,
     };
