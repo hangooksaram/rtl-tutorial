@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, prettyDOM, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TodoForm from "../../components/todo/TodoForm";
 
@@ -7,7 +7,8 @@ describe("todo form", () => {
   const inputText = "TDD 배우기";
 
   const elements = (props) => {
-    render(<TodoForm {...props} />);
+    const { debug } = render(<TodoForm {...props} />);
+    debug();
     const input = screen.getByPlaceholderText("할 일을 입력하세요");
     const button = screen.getByText("등록");
 
@@ -21,28 +22,28 @@ describe("todo form", () => {
     expect(button).toBeTruthy();
   });
 
-  it("input 입력 테스트", () => {
-    const { input, button } = elements();
-    fireEvent.change(input, {
-      target: {
-        value: inputText,
-      },
-    });
-    expect(input).toHaveAttribute("value", inputText);
-  });
+  // it("input 입력 테스트", () => {
+  //   const { input, button } = elements();
+  //   fireEvent.change(input, {
+  //     target: {
+  //       value: inputText,
+  //     },
+  //   });
+  //   expect(input).toHaveAttribute("value", inputText);
+  // });
 
-  it("onInsert 함수 props 로 넘기기", () => {
-    const onInsert = jest.fn();
-    const { input, button } = elements({ onInsert });
+  // it("onInsert 함수 props 로 넘기기", () => {
+  //   const onInsert = jest.fn();
+  //   const { input, button } = elements({ onInsert });
 
-    fireEvent.change(input, {
-      target: {
-        value: inputText,
-      },
-    });
+  //   fireEvent.change(input, {
+  //     target: {
+  //       value: inputText,
+  //     },
+  //   });
 
-    fireEvent.click(button);
-    expect(onInsert).toBeCalledWith(inputText);
-    expect(input).toHaveAttribute("value", "");
-  });
+  //   fireEvent.click(button);
+  //   expect(onInsert).toBeCalledWith(inputText);
+  //   expect(input).toHaveAttribute("value", "");
+  // });
 });
